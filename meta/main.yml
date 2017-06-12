@@ -1,0 +1,22 @@
+---
+
+galaxy_info:
+  author: Gunter Grodotzki
+  description: Compile and install bitcoind / bitcoin-cli / bitcoin-tx (e.g. headless).
+  company: weheartwebsites UG
+  license: MIT
+  min_ansible_version: 2.3
+  platforms:
+  - name: Ubuntu
+    versions:
+    - xenial
+    - trusty
+  - name: Debian
+    versions:
+    - jessie
+    - wheezy
+  galaxy_tags:
+    - bitcoin
+    - btc
+    - cryptocurrency
+dependencies: []

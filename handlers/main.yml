@@ -1,0 +1,12 @@
+---
+
+- name: bitcoin_reload_systemd
+  command: systemctl daemon-reload
+  become: yes
+
+- name: restart_bitcoind
+  service:
+    name: bitcoind
+    state: restarted
+    enabled: yes
+  become: yes

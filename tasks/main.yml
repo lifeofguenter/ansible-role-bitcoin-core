@@ -1,0 +1,11 @@
+---
+
+- name: get current bitcoin version
+  command: bitcoin-cli -version
+  register: bitcoin_version_current
+  ignore_errors: yes
+
+- include: compile.yml
+  when: bitcoin_version_current.rc != 0 or not bitcoin_version_current.stdout | search(bitcoin_version_string_match)
+
+- include: setup.yml
