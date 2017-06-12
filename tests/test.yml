@@ -2,5 +2,7 @@
 
 - hosts: localhost
   remote_user: root
+  vars:
+    bitcoin_user: root
   roles:
     - ansible-role-bitcoin-core
