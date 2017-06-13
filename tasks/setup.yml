@@ -1,5 +1,14 @@
 ---
 
+- name: create bitcoin user
+  user:
+    name: "{{ bitcoin_user }}"
+    shell: /usr/sbin/nologin
+    home: "{{ bitcoin_home }}"
+    system: yes
+  become: yes
+  when: bitcoin_user != 'root'
+
 - name: check for systemd
   command: systemctl --version
   register: bitcoin_systemctl_version

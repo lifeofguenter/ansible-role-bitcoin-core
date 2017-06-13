@@ -14,6 +14,8 @@ none
 
 - `bitcoin_user: bitcoin`
 
+- `bitcoin_home: "/home/{{ bitcoin_user }}"`
+
 ## Dependencies
 
 none
