@@ -1,5 +1,13 @@
 ---
 
+- name: apt install bc
+  apt:
+    name: bc
+    state: present
+    update_cache: yes
+    cache_valid_time: 3600
+  become: yes
+
 - name: copy over plugins
   copy:
     src: munin-bitcoin/{{ item }}
