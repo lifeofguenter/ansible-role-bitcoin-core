@@ -1,0 +1,62 @@
+#!/bin/sh
+# -*- sh -*-
+# vim: ft=sh
+
+: << =cut
+
+=head1 NAME
+
+bitcoind_mempool - Plugin to monitor the size of the mempool
+
+=head1 CONFIGURATION
+
+ [bitcoind*]
+    user bitcoin
+    env.binary bitcoin-cli
+    env.data_dir /var/lib/bitcoin
+
+=head1 AUTHOR
+
+Cedric Felizard
+
+=head1 LICENSE
+
+AGPLv3+
+
+=head1 MAGIC MARKERS
+
+ #%# family=auto
+ #%# capabilities=autoconf
+
+=cut
+
+METRIC=${0##*/bitcoind_mempool_}
+case $METRIC in
+  size|bytes);;
+  *) exit 1;;
+esac
+
+BINARY=${binary:-"/usr/bin/bitcoin-cli"}
+DATA_DIR=${data_dir:-"/var/lib/bitcoin"}
+
+if [ "$1" = "autoconf" ]; then
+    autoconf="yes"
+
+    command -v $BINARY >/dev/null || autoconf="no"
+
+    echo $autoconf
+    exit 0
+fi
+
+if [ "$1" = "config" ]; then
+    echo "graph_title Mempool ${METRIC}"
+    echo "graph_vlabel ${METRIC}"
+    echo "graph_category bitcoind"
+    echo "${METRIC}.label mempool (${METRIC})"
+    exit 0
+fi
+
+mempool="$($BINARY -datadir=$DATA_DIR getmempoolinfo)"
+value=$(echo "$mempool" | grep $METRIC | grep -o '[0-9]*')
+
+echo "${METRIC}.value $(echo $value)"

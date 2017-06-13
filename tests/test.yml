@@ -4,5 +4,6 @@
   remote_user: root
   vars:
     bitcoin_user: root
+    bitcoin_home: /var/lib/bitcoin
   roles:
     - ansible-role-bitcoin-core

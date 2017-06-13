@@ -9,6 +9,14 @@
   become: yes
   when: bitcoin_user != 'root'
 
+- name: make sure datadir/home exists
+  file:
+    path: "{{ bitcoin_home }}"
+    state: directory
+    mode: 0755
+  become: yes
+  when: bitcoin_user == 'root'
+
 - name: check for systemd
   command: systemctl --version
   register: bitcoin_systemctl_version

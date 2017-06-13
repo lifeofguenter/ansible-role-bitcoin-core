@@ -1,0 +1,43 @@
+---
+
+- name: copy over plugins
+  copy:
+    src: munin-bitcoin/{{ item }}
+    dest: /usr/share/munin/plugins/{{ item }}
+    mode: 'a+x'
+  with_items:
+    - bitcoind_blockchain_size
+    - bitcoind_blockchain_verification
+    - bitcoind_blocks
+    - bitcoind_connections
+    - bitcoind_difficulty
+    - bitcoind_mempool_bytes
+    - bitcoind_mempool_size
+    - bitcoind_network_traffic
+  become: yes
+  notify: bitcoin_restart_munin_node
+
+- name: enable unbound_munin_histogram
+  file:
+    src: /usr/share/munin/plugins/{{ item }}
+    dest: /etc/munin/plugins/{{ item }}
+    state: link
+  with_items:
+    - bitcoind_blockchain_size
+    - bitcoind_blockchain_verification
+    - bitcoind_blocks
+    - bitcoind_connections
+    - bitcoind_difficulty
+    - bitcoind_mempool_bytes
+    - bitcoind_mempool_size
+    - bitcoind_network_traffic
+  become: yes
+  notify: bitcoin_restart_munin_node
+
+- name: add munin plugin-conf
+  template:
+    src: munin-plugin.conf
+    dest: /etc/munin/plugin-conf.d/bitcoind
+    mode: 0644
+  become: yes
+  notify: bitcoin_restart_munin_node

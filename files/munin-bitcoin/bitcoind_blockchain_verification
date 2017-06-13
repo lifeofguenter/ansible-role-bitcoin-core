@@ -1,0 +1,56 @@
+#!/bin/sh
+# -*- sh -*-
+# vim: ft=sh
+
+: << =cut
+
+=head1 NAME
+
+bitcoind_blockchain_verification - Plugin to monitor the blockchain verification percentage
+
+=head1 CONFIGURATION
+
+ [bitcoind*]
+    user bitcoin
+    env.binary bitcoin-cli
+    env.data_dir /var/lib/bitcoin
+
+=head1 AUTHOR
+
+Cedric Felizard
+
+=head1 LICENSE
+
+AGPLv3+
+
+=head1 MAGIC MARKERS
+
+ #%# family=auto
+ #%# capabilities=autoconf
+
+=cut
+
+BINARY=${binary:-"/usr/bin/bitcoin-cli"}
+DATA_DIR=${data_dir:-"/var/lib/bitcoin"}
+
+if [ "$1" = "autoconf" ]; then
+    autoconf="yes"
+
+    command -v $BINARY >/dev/null || autoconf="no"
+
+    echo $autoconf
+    exit 0
+fi
+
+if [ "$1" = "config" ]; then
+    echo 'graph_title Blockchain verification'
+    echo 'graph_vlabel percentage'
+    echo 'graph_category bitcoind'
+    echo 'graph_info This graph shows the blockchain verification progress.'
+    echo 'bitcoind_blockchain_verification.label blockchain verification'
+    echo 'bitcoind_blockchain_verification.info The current progress of the blockchain verification.'
+    exit 0
+fi
+
+echo "bitcoind_blockchain_verification.value $($BINARY -datadir=$DATA_DIR getblockchaininfo | grep verificationprogress | grep -o '[0-9.]*')"
+

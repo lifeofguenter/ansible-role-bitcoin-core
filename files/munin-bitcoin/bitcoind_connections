@@ -1,0 +1,75 @@
+#!/bin/sh
+# -*- sh -*-
+# vim: ft=sh
+
+: << =cut
+
+=head1 NAME
+
+bitcoind_connections - Plugin to monitor the number of open connections
+
+=head1 CONFIGURATION
+
+ [bitcoind*]
+    user bitcoin
+    env.binary bitcoin-cli
+    env.data_dir /var/lib/bitcoin
+
+=head1 AUTHOR
+
+Cedric Felizard
+
+=head1 LICENSE
+
+AGPLv3+
+
+=head1 MAGIC MARKERS
+
+ #%# family=auto
+ #%# capabilities=autoconf
+
+=cut
+
+BINARY=${binary:-"/usr/bin/bitcoin-cli"}
+DATA_DIR=${data_dir:-"/var/lib/bitcoin"}
+
+if [ "$1" = "autoconf" ]; then
+    autoconf="yes"
+
+    command -v $BINARY >/dev/null || autoconf="no"
+
+    echo $autoconf
+    exit 0
+fi
+
+peers=$($BINARY -datadir=$DATA_DIR getpeerinfo | grep addrlocal | awk -F '"' '{print $4}' | grep ':8333$' | sort | uniq -c | sed 's/:8333$//' | awk '{print $2 " " $1}')
+
+if [ "$1" = "config" ]; then
+    echo 'graph_title Connection count'
+    echo 'graph_vlabel number of connections'
+    echo 'graph_category bitcoind'
+    echo 'graph_info This graph shows the number of open connections.'
+    echo 'total.label total'
+    echo 'outbound.label outbound'
+
+    for address in $(echo $peers | awk '{for (i=1;i<=NF;i+=2) { print $i }}'); do
+        echo "$(echo $address | sha1sum | cut -c1-8).label ${address}"
+    done
+
+    exit 0
+fi
+
+echo "total.value $($BINARY -datadir=$DATA_DIR getconnectioncount)"
+echo "outbound.value $($BINARY -datadir=$DATA_DIR getpeerinfo | grep -c '"inbound": false')"
+
+odd=0
+for address_or_count in $peers; do
+    odd=$((1-odd))
+
+    if [ $odd -eq 1 ]; then
+        echo -n "$(echo $address_or_count | sha1sum | cut -c1-8).value "
+    else
+        echo $address_or_count
+    fi
+done
+

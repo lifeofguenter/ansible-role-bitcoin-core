@@ -28,6 +28,10 @@ none
     - { role: lifeofguenter.bitcoin-core }
 ```
 
+## Thank you
+
+- Cédric Félizard ([infertux](https://github.com/infertux)) for [munin-bitcoin](https://github.com/infertux/munin-bitcoin)
+
 ## License
 
 [MIT](LICENSE)

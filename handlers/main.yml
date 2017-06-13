@@ -4,6 +4,12 @@
   command: systemctl daemon-reload
   become: yes
 
+- name: bitcoin_restart_munin_node
+  service:
+    name: munin-node
+    state: restarted
+  become: yes
+
 - name: restart_bitcoind
   service:
     name: bitcoind

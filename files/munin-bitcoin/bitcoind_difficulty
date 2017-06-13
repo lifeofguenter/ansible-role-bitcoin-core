@@ -1,0 +1,54 @@
+#!/bin/sh
+# -*- sh -*-
+# vim: ft=sh
+
+: << =cut
+
+=head1 NAME
+
+bitcoind_difficulty - Plugin to monitor the mining difficulty
+
+=head1 CONFIGURATION
+
+ [bitcoind*]
+    user bitcoin
+
+=head1 AUTHOR
+
+Cedric Felizard
+
+=head1 LICENSE
+
+AGPLv3+
+
+=head1 MAGIC MARKERS
+
+ #%# family=auto
+ #%# capabilities=autoconf
+
+=cut
+
+BINARY=${binary:-"/usr/bin/bitcoin-cli"}
+DATA_DIR=${data_dir:-"/var/lib/bitcoin"}
+
+if [ "$1" = "autoconf" ]; then
+    autoconf="yes"
+
+    command -v $BINARY >/dev/null || autoconf="no"
+
+    echo $autoconf
+    exit 0
+fi
+
+if [ "$1" = "config" ]; then
+    echo 'graph_title Difficulty'
+    echo 'graph_vlabel difficulty'
+    echo 'graph_category bitcoind'
+    echo 'graph_info This graph shows the mining difficulty.'
+    echo 'bitcoind_difficulty.label difficulty'
+    echo 'bitcoind_difficulty.info The current mining difficulty.'
+    exit 0
+fi
+
+echo "bitcoind_difficulty.value $($BINARY -datadir=$DATA_DIR getdifficulty)"
+
