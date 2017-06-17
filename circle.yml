@@ -22,6 +22,11 @@ test:
     - sudo cat /etc/bitcoin/bitcoind.conf
     - sudo /etc/init.d/bitcoind stop
 
+deployment:
+  release:
+    tag: /[0-9]+(\.[0-9]+)*/
+    owner: lifeofguenter
+
 notify:
   webhooks:
     - url: https://galaxy.ansible.com/api/v1/notifications/
