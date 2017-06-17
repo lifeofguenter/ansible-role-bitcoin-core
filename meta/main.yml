@@ -7,14 +7,15 @@ galaxy_info:
   license: MIT
   min_ansible_version: 2.3
   platforms:
-  - name: Ubuntu
-    versions:
-    - xenial
-    - trusty
-  - name: Debian
-    versions:
-    - jessie
-    - wheezy
+    - name: Ubuntu
+      versions:
+        - xenial
+        - trusty
+    - name: Debian
+      versions:
+        - stretch
+        - jessie
+        - wheezy
   galaxy_tags:
     - bitcoin
     - btc

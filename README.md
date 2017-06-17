@@ -16,6 +16,12 @@ none
 
 - `bitcoin_home: "/home/{{ bitcoin_user }}"`
 
+- `bitcoin_conf_datadir: "{{ bitcoin_home }}"`
+
+- `bitcoin_conf_pid: /run/bitcoind/bitcoind.pid`
+
+See https://en.bitcoin.it/wiki/Running_Bitcoin#Bitcoin.conf_Configuration_File for more options (prefix them with `bitcoin_conf_`)
+
 ## Dependencies
 
 none

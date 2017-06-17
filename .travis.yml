@@ -26,5 +26,7 @@ script:
 
   - bitcoin-cli -version
 
+  - cat /etc/bitcoin/bitcoind.conf
+
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/

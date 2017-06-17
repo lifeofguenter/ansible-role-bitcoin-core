@@ -5,3 +5,7 @@ bitcoin_version: 0.14.1
 bitcoin_user: bitcoin
 
 bitcoin_home: "/home/{{ bitcoin_user }}"
+
+bitcoin_conf_datadir: "{{ bitcoin_home }}"
+
+bitcoin_conf_pid: /run/bitcoind/bitcoind.pid

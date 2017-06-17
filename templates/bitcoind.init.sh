@@ -35,7 +35,7 @@ DAEMON=/usr/local/bin/$NAME
 PIDFILE=/run/$NAME.pid
 SCRIPTNAME=/etc/init.d/$NAME
 CHUID={{ bitcoin_user }}
-DAEMON_ARGS="-daemon -pid=/run/bitcoind/bitcoind.pid -conf=/etc/bitcoin/bitcoind.conf -datadir={{ bitcoin_home }}"
+DAEMON_ARGS="-daemon -conf=/etc/bitcoin/bitcoind.conf"
 
 # Exit if the package is not installed
 [ -x "$DAEMON" ] || exit 0
