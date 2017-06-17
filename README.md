@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/lifeofguenter/ansible-role-bitcoin-core.svg?branch=master)](https://travis-ci.org/lifeofguenter/ansible-role-bitcoin-core)
+[![CircleCI](https://circleci.com/gh/lifeofguenter/ansible-role-bitcoin-core.svg?style=svg)](https://circleci.com/gh/lifeofguenter/ansible-role-bitcoin-core)
 
 # Ansible Role: Bitcoin Core
 

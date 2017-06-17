@@ -1,0 +1,26 @@
+---
+
+machine:
+  environment:
+    MAKEFLAGS: -j 2
+
+dependencies:
+  pre:
+    - pip install ansible
+    - printf '[defaults]\nroles_path=../' > ansible.cfg
+
+compile:
+  override:
+    - ansible-playbook tests/test.yml -i tests/inventory --connection=local
+    - ansible-playbook tests/test.yml -i tests/inventory --connection=local
+
+test:
+  pre:
+    - ansible --version
+  post:
+    - bitcoin-cli -version
+    - cat /etc/bitcoin/bitcoind.conf
+
+notify:
+  webhooks:
+    - url: https://galaxy.ansible.com/api/v1/notifications/
