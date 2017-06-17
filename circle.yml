@@ -19,8 +19,7 @@ test:
     - ansible --version
   post:
     - bitcoin-cli -version
-    - cat /etc/bitcoin/bitcoind.conf
-    - sudo /etc/init.d/bitcoind status
+    - sudo cat /etc/bitcoin/bitcoind.conf
     - sudo /etc/init.d/bitcoind stop
 
 notify:
