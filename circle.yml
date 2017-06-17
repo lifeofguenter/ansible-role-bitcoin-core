@@ -20,6 +20,8 @@ test:
   post:
     - bitcoin-cli -version
     - cat /etc/bitcoin/bitcoind.conf
+    - sudo /etc/init.d/bitcoind status
+    - sudo /etc/init.d/bitcoind stop
 
 notify:
   webhooks:
