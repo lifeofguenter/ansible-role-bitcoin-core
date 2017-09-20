@@ -1,6 +1,8 @@
 ---
 
-bitcoin_version: 0.15.0.1
+bitcoin_version: 0.15.0
+
+bitcoin_minor_version: ".1"
 
 bitcoin_user: bitcoin
 
