@@ -24,7 +24,7 @@
 
 - name: fetch source code
   unarchive:
-    src: https://bitcoin.org/bin/bitcoin-core-{{ bitcoin_version }}/bitcoin-{{ bitcoin_version }}{{ bitcoin_minor_version }}.tar.gz
+    src: https://bitcoin.org/bin/bitcoin-core-{{ bitcoin_version }}{{ bitcoin_minor_version }}/bitcoin-{{ bitcoin_version }}{{ bitcoin_minor_version }}.tar.gz
     dest: /tmp
     remote_src: True
 
