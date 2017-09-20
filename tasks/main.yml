@@ -1,5 +1,9 @@
 ---
 
+- set_fact:
+    bitcoin_minor_version_match: ".0"
+  when: bitcoin_minor_version == ""
+
 - name: get current bitcoin version
   command: bitcoin-cli -version
   register: bitcoin_version_current
