@@ -1,8 +1,8 @@
 ---
 
-bitcoin_version: 0.15.0
+bitcoin_version: 0.16.1
 
-bitcoin_minor_version: ".1"
+bitcoin_minor_version: ""
 
 bitcoin_minor_version_match: "{{ bitcoin_minor_version }}"
 

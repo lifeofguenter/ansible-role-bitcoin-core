@@ -10,7 +10,7 @@
   ignore_errors: yes
 
 - include: compile.yml
-  when: bitcoin_version_current.rc != 0 or not bitcoin_version_current.stdout | search(bitcoin_version_string_match)
+  when: bitcoin_version_current.rc != 0 or not bitcoin_version_current.stdout is search(bitcoin_version_string_match)
 
 - include: setup.yml
 

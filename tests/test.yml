@@ -2,11 +2,14 @@
 
 - hosts: localhost
   remote_user: root
+
   vars:
     bitcoin_user: root
     bitcoin_home: /var/lib/bitcoin
     bitcoin_conf_rpcallowip:
       - 192.168.1.1
       - 192.168.1.2
-  roles:
-    - ansible-role-bitcoin-core
+
+  tasks:
+    - import_role:
+        name: project
