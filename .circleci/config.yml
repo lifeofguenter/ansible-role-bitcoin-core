@@ -11,8 +11,9 @@ jobs:
     steps:
       - run: pip install ansible
       - run: ansible --version
-      - run: printf '[defaults]\nroles_path=../' > ansible.cfg
+
       - checkout
+      - run: printf '[defaults]\nroles_path=../' > ansible.cfg
       - run: ansible-playbook tests/test.yml -i tests/inventory --connection=local
       - run: ansible-playbook tests/test.yml -i tests/inventory --connection=local
       - run: bitcoin-cli -version
