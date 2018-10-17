@@ -1,3 +1,3 @@
 ---
 
-bitcoin_version_string_match: "Bitcoin Core RPC client version v{{ bitcoin_version }}{{ bitcoin_minor_version_match }}"
+bitcoin_version_string_match: "Bitcoin Core RPC client version v{{ bitcoin_version }}{{ bitcoin_patch_version_match }}"
