@@ -24,7 +24,7 @@
 
 - name: fetch source code
   unarchive:
-    src: https://bitcoin.org/bin/bitcoin-core-{{ bitcoin_version }}{{ bitcoin_minor_version }}/bitcoin-{{ bitcoin_version }}{{ bitcoin_minor_version }}.tar.gz
+    src: https://bitcoin.org/bin/bitcoin-core-{{ bitcoin_version }}{{ bitcoin_patch_version }}/bitcoin-{{ bitcoin_version }}{{ bitcoin_patch_version }}.tar.gz
     dest: /tmp
     remote_src: True
 
@@ -57,7 +57,7 @@
     chdir: /tmp/bitcoin-{{ bitcoin_version }}
 
 - name: make
-  command: make -j{{ ansible_processor_vcpus }}
+  command: make
   args:
     chdir: /tmp/bitcoin-{{ bitcoin_version }}
 
