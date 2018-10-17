@@ -2,24 +2,25 @@
 
 - name: install prerequisites
   apt:
-    name: "{{ item }}"
+    name: "{{ packages }}"
     state: present
     update_cache: yes
     cache_valid_time: 3600
-  with_items:
-    - ca-certificates
-    - make
-    - gcc
-    - g++
-    - pkg-config
-    - libssl-dev
-    - libboost-dev
-    - libboost-system-dev
-    - libboost-filesystem-dev
-    - libboost-program-options-dev
-    - libboost-thread-dev
-    - libevent-dev
-    - libdb++-dev
+  vars:
+    packages:
+      - ca-certificates
+      - make
+      - gcc
+      - g++
+      - pkg-config
+      - libssl-dev
+      - libboost-dev
+      - libboost-system-dev
+      - libboost-filesystem-dev
+      - libboost-program-options-dev
+      - libboost-thread-dev
+      - libevent-dev
+      - libdb++-dev
   become: yes
 
 - name: fetch source code
