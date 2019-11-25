@@ -1,10 +1,6 @@
 ---
 
-bitcoin_version: 0.17.1
-
-bitcoin_patch_version: ""
-
-bitcoin_patch_version_match: "{{ bitcoin_patch_version }}"
+bitcoin_version: 0.19.0.1
 
 bitcoin_user: bitcoin
 
