@@ -22,6 +22,7 @@
       - libboost-thread-dev
       - libevent-dev
       - libdb++-dev
+      - libtool
   become: yes
 
 - name: fetch source code
