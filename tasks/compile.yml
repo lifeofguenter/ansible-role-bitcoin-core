@@ -35,6 +35,11 @@
     chdir: /tmp/bitcoin-{{ bitcoin_version }}
   ignore_errors: yes
 
+- name: autogen
+  command: ./autogen.sh
+  args:
+    chdir: /tmp/bitcoin-{{ bitcoin_version }}
+
 - name: configure
   command: >
     ./configure
