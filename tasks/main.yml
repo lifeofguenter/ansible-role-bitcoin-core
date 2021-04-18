@@ -4,6 +4,7 @@
   command: bitcoin-cli -version
   register: bitcoin_version_current
   ignore_errors: yes
+  changed_when: no
 
 - include: compile.yml
   when: bitcoin_version_current.rc != 0 or not bitcoin_version_current.stdout is search(bitcoin_version_string_match)
@@ -14,6 +15,7 @@
   command: dpkg -L munin-node
   register: bitcoin_munin_node_check
   ignore_errors: yes
+  changed_when: no
 
 - include: munin-plugin.yml
   when: bitcoin_munin_node_check.rc == 0

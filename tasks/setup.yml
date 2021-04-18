@@ -37,7 +37,7 @@
   template:
     src: bitcoind.init.sh
     dest: /etc/init.d/bitcoind
-    mode: "a+x"
+    mode: a+x
   become: yes
   when: bitcoin_systemctl_version.rc != 0
   notify: restart_bitcoind

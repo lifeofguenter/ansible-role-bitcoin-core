@@ -65,7 +65,7 @@
     chdir: /tmp/bitcoin-{{ bitcoin_version }}
 
 - name: make
-  command: make
+  command: make -j{{ ansible_processor_vcpus }}
   args:
     chdir: /tmp/bitcoin-{{ bitcoin_version }}
 
