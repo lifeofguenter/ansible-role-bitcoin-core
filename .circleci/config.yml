@@ -5,6 +5,8 @@ jobs:
   build:
     machine:
       image: ubuntu-2004:202101-01
+      environment:
+        ANSIBLE_PYTHON_INTERPRETER: /usr/bin/python3
 
     steps:
       - run: pip3 install ansible
@@ -18,4 +20,4 @@ jobs:
       - run: ansible-playbook tests/test.yml -i tests/inventory --connection=local
       - run: bitcoin-cli -version
       - run: sudo cat /etc/bitcoin/bitcoind.conf
-      - run: sudo /etc/init.d/bitcoind stop
+      - run: sudo systemctl stop bitcoind

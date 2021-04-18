@@ -17,30 +17,15 @@
   become: yes
   when: bitcoin_user == 'root'
 
-- name: check for systemd
-  command: systemctl --version
-  register: bitcoin_systemctl_version
-  ignore_errors: yes
-
 - name: add bitcoind.service
   template:
     src: bitcoind.service.ini
     dest: /lib/systemd/system/bitcoind.service
     mode: 0644
   become: yes
-  when: bitcoin_systemctl_version.rc == 0
   notify:
     - bitcoin_reload_systemd
     - restart_bitcoind
-
-- name: add bitcoind.init
-  template:
-    src: bitcoind.init.sh
-    dest: /etc/init.d/bitcoind
-    mode: a+x
-  become: yes
-  when: bitcoin_systemctl_version.rc != 0
-  notify: restart_bitcoind
 
 - name: create folders
   file:
