@@ -5,8 +5,8 @@ jobs:
   build:
     machine:
       image: ubuntu-2004:202101-01
-      environment:
-        ANSIBLE_PYTHON_INTERPRETER: /usr/bin/python3
+    environment:
+      ANSIBLE_PYTHON_INTERPRETER: /usr/bin/python3
 
     steps:
       - run: pip3 install ansible
