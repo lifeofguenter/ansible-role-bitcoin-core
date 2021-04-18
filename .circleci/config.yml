@@ -1,15 +1,13 @@
-version: 2
+version: 2.1
 
 jobs:
 
   build:
-    environment:
-      MAKEFLAGS: -j 2
-
-    machine: true
+    machine:
+      image: ubuntu-2004:202101-01
 
     steps:
-      - run: pip install ansible
+      - run: pip3 install ansible
       - run: ansible --version
 
       - checkout
