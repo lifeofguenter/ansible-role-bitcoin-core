@@ -52,4 +52,3 @@ if [ "$1" = "config" ]; then
 fi
 
 echo "bitcoind_blockchain_size.value $(du --block-size=1 -s $BLOCK_DIR | awk '{print $1}')"
-

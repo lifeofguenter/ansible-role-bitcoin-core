@@ -51,4 +51,3 @@ if [ "$1" = "config" ]; then
 fi
 
 echo "bitcoind_difficulty.value $($BINARY -datadir=$DATA_DIR getdifficulty)"
-

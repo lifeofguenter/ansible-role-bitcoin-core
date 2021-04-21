@@ -53,4 +53,3 @@ if [ "$1" = "config" ]; then
 fi
 
 echo "bitcoind_blockchain_verification.value $($BINARY -datadir=$DATA_DIR getblockchaininfo | grep verificationprogress | grep -o '[0-9.]*')"
-

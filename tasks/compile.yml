@@ -36,11 +36,13 @@
   args:
     chdir: /tmp/bitcoin-{{ bitcoin_version }}
   ignore_errors: yes
+  changed_when: yes
 
 - name: autogen
   command: ./autogen.sh
   args:
     chdir: /tmp/bitcoin-{{ bitcoin_version }}
+  changed_when: yes
 
 - name: configure
   command: >
@@ -63,11 +65,13 @@
     --with-gui=no
   args:
     chdir: /tmp/bitcoin-{{ bitcoin_version }}
+  changed_when: yes
 
 - name: make
   command: make -j{{ ansible_processor_vcpus }}
   args:
     chdir: /tmp/bitcoin-{{ bitcoin_version }}
+  changed_when: yes
 
 - name: install
   command: make install
@@ -75,3 +79,4 @@
     chdir: /tmp/bitcoin-{{ bitcoin_version }}
   become: yes
   notify: restart_bitcoind
+  changed_when: yes

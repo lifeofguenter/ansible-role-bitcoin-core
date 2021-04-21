@@ -53,4 +53,3 @@ if [ "$1" = "config" ]; then
 fi
 
 echo "bitcoind_blocks.value $($BINARY -datadir=$DATA_DIR getblockcount)"
-
