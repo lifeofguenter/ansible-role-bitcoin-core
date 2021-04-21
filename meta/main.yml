@@ -1,6 +1,7 @@
 ---
 
 galaxy_info:
+  role_name: bitcoin_core
   author: Gunter Grodotzki
   description: Compile and install bitcoind / bitcoin-cli / bitcoin-tx (e.g. headless).
   license: MIT

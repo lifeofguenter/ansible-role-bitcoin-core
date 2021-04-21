@@ -44,13 +44,14 @@ fi
 
 if [ "$1" = "config" ]; then
     echo 'graph_title Network traffic'
+    echo 'graph_args --base 1024'
     echo 'graph_vlabel bytes'
     echo 'graph_category bitcoind'
     echo 'graph_info This graph shows the sum of incoming and outgoing traffic.'
     echo 'bitcoind_network_traffic.label network traffic'
     echo 'bitcoind_network_traffic.info The network traffic.'
+    echo 'bitcoind_network_traffic.type COUNTER'
     exit 0
 fi
 
 echo "bitcoind_network_traffic.value $($BINARY -datadir=$DATA_DIR getnettotals | grep totalbytes | grep -o '[0-9]*' | sed "N;s/\n/+/" | bc)"
-

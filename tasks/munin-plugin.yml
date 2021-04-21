@@ -12,7 +12,7 @@
   copy:
     src: munin-bitcoin/{{ item }}
     dest: /usr/share/munin/plugins/{{ item }}
-    mode: 'a+x'
+    mode: a+x
   with_items:
     - bitcoind_blockchain_size
     - bitcoind_blockchain_verification
