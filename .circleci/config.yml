@@ -4,7 +4,7 @@ jobs:
 
   build:
     machine:
-      image: ubuntu-2004:202101-01
+      image: ubuntu-2004:202104-01
     environment:
       ANSIBLE_PYTHON_INTERPRETER: /usr/bin/python3
 

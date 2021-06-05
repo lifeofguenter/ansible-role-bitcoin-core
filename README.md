@@ -10,7 +10,7 @@ none
 
 ## Role Variables
 
-- `bitcoin_version: 0.21.0`
+- `bitcoin_version: 0.21.1`
 
 - `bitcoin_user: bitcoin`
 
@@ -31,7 +31,18 @@ none
 ```
 - hosts: miner
   roles:
-    - { role: lifeofguenter.bitcoin-core }
+    - { role: lifeofguenter.bitcoin_core }
+```
+
+## Munin Plugin
+
+For this the munin-plugin to work, add the following override:
+
+`/etc/systemd/system/munin-node.service.d/override.conf`
+
+```ini
+[Service]
+ProtectHome = read-only
 ```
 
 ## Thank you
