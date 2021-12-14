@@ -11,11 +11,10 @@ galaxy_info:
       versions:
         - focal
         - bionic
-        - xenial
     - name: Debian
       versions:
+        - bullseye
         - buster
-        - stretch
   galaxy_tags:
     - bitcoin
     - btc
