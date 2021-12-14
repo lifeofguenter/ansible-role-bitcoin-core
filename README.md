@@ -10,7 +10,7 @@ none
 
 ## Role Variables
 
-- `bitcoin_version: 0.21.1`
+- `bitcoin_version: 22.0`
 
 - `bitcoin_user: bitcoin`
 
