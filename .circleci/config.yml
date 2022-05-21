@@ -4,13 +4,19 @@ jobs:
 
   build:
     machine:
-      image: ubuntu-2004:202111-01
+      # https://circleci.com/docs/2.0/configuration-reference/#machine
+      image: ubuntu-2004:202201-02
     environment:
       ANSIBLE_PYTHON_INTERPRETER: /usr/bin/python3
 
     steps:
-      - run: pip3 install ansible
+      - run: sudo rm -f /etc/apt/sources.list.d/google.list /etc/apt/sources.list.d/heroku.list
+      - run: sudo apt remove --assume-yes --purge apparmor
+      - run: sudo apt update
+
+      - run: pip3 install ansible ansible-lint
       - run: ansible --version
+      - run: ansible-lint --version
 
       - checkout
       - run: printf '[defaults]\nroles_path=../' > ansible.cfg
