@@ -1,10 +1,10 @@
 ---
 
-- name: install prerequisites
-  apt:
+- name: Install prerequisites
+  ansible.builtin.apt:
     name: "{{ packages }}"
     state: present
-    update_cache: yes
+    update_cache: true
     cache_valid_time: 3600
   vars:
     packages:
@@ -23,29 +23,29 @@
       - libevent-dev
       - libdb++-dev
       - libtool
-  become: yes
+  become: true
 
-- name: fetch source code
-  unarchive:
+- name: Fetch source code
+  ansible.builtin.unarchive:
     src: https://bitcoincore.org/bin/bitcoin-core-{{ bitcoin_version }}/bitcoin-{{ bitcoin_version }}.tar.gz
     dest: /tmp
-    remote_src: True
+    remote_src: true
 
-- name: make clean
-  command: make clean
+- name: Make clean
+  ansible.builtin.command: make clean
   args:
     chdir: /tmp/bitcoin-{{ bitcoin_version }}
-  ignore_errors: yes
-  changed_when: yes
+  failed_when: false
+  changed_when: true
 
-- name: autogen
-  command: ./autogen.sh
+- name: Autogen
+  ansible.builtin.command: ./autogen.sh
   args:
     chdir: /tmp/bitcoin-{{ bitcoin_version }}
-  changed_when: yes
+  changed_when: true
 
-- name: configure
-  command: >
+- name: Configure
+  ansible.builtin.command: >
     ./configure
     --sysconfdir=/etc
     --localstatedir=/var
@@ -65,18 +65,18 @@
     --with-gui=no
   args:
     chdir: /tmp/bitcoin-{{ bitcoin_version }}
-  changed_when: yes
+  changed_when: true
 
-- name: make
-  command: make -j{{ ansible_processor_vcpus }}
+- name: Make
+  ansible.builtin.command: make -j{{ ansible_processor_vcpus }}
   args:
     chdir: /tmp/bitcoin-{{ bitcoin_version }}
-  changed_when: yes
+  changed_when: true
 
-- name: install
-  command: make install
+- name: Install
+  ansible.builtin.command: make install
   args:
     chdir: /tmp/bitcoin-{{ bitcoin_version }}
-  become: yes
-  notify: restart_bitcoind
-  changed_when: yes
+  become: true
+  notify: Restart_bitcoind
+  changed_when: true

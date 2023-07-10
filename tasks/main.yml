@@ -1,21 +1,24 @@
 ---
 
-- name: get current bitcoin version
-  command: bitcoin-cli -version
+- name: Get current bitcoin version
+  ansible.builtin.command: bitcoin-cli -version
   register: bitcoin_version_current
-  ignore_errors: yes
-  changed_when: no
+  ignore_errors: true
+  changed_when: false
 
-- include: compile.yml
+- name: Import compile.yml
+  ansible.builtin.import_tasks: compile.yml
   when: bitcoin_version_current.rc != 0 or not bitcoin_version_current.stdout is search(bitcoin_version_string_match)
 
-- include: setup.yml
+- name: Import setup.yml
+  ansible.builtin.import_tasks: setup.yml
 
-- name: check if munin-node is installed
-  command: dpkg -L munin-node
+- name: Check if munin-node is installed
+  ansible.builtin.command: dpkg -L munin-node
   register: bitcoin_munin_node_check
-  ignore_errors: yes
-  changed_when: no
+  ignore_errors: true
+  changed_when: false
 
-- include: munin-plugin.yml
+- name: Import munin-plugin.yml
+  ansible.builtin.import_tasks: munin-plugin.yml
   when: bitcoin_munin_node_check.rc == 0

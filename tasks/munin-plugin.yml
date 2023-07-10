@@ -1,15 +1,15 @@
 ---
 
-- name: apt install bc
-  apt:
+- name: Apt install bc
+  ansible.builtin.apt:
     name: bc
     state: present
-    update_cache: yes
+    update_cache: true
     cache_valid_time: 3600
-  become: yes
+  become: true
 
-- name: copy over plugins
-  copy:
+- name: Copy over plugins
+  ansible.builtin.copy:
     src: munin-bitcoin/{{ item }}
     dest: /usr/share/munin/plugins/{{ item }}
     mode: a+x
@@ -22,11 +22,11 @@
     - bitcoind_mempool_bytes
     - bitcoind_mempool_size
     - bitcoind_network_traffic
-  become: yes
-  notify: bitcoin_restart_munin_node
+  become: true
+  notify: Bitcoin_restart_munin_node
 
-- name: enable unbound_munin_histogram
-  file:
+- name: Enable unbound_munin_histogram
+  ansible.builtin.file:
     src: /usr/share/munin/plugins/{{ item }}
     dest: /etc/munin/plugins/{{ item }}
     state: link
@@ -39,13 +39,13 @@
     - bitcoind_mempool_bytes
     - bitcoind_mempool_size
     - bitcoind_network_traffic
-  become: yes
-  notify: bitcoin_restart_munin_node
+  become: true
+  notify: Bitcoin_restart_munin_node
 
-- name: add munin plugin-conf
-  template:
+- name: Add munin plugin-conf
+  ansible.builtin.template:
     src: munin-plugin.conf
     dest: /etc/munin/plugin-conf.d/bitcoind
-    mode: 0644
-  become: yes
-  notify: bitcoin_restart_munin_node
+    mode: '0644'
+  become: true
+  notify: Bitcoin_restart_munin_node
