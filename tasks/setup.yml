@@ -46,3 +46,10 @@
   become: true
   become_user: "{{ bitcoin_user }}"
   notify: Restart_bitcoind
+
+- name: Add tmpfiles.conf
+  ansible.builtin.template:
+    src: tmpfiles.conf
+    dest: /etc/tmpfiles.d/bitcoind.conf
+    mode: '0644'
+  become: true
