@@ -12,12 +12,10 @@ galaxy_info:
       versions:
         - bookworm
         - bullseye
-        - buster
     - name: Ubuntu
       versions:
+        - noble
         - jammy
-        - focal
-        - bionic
   galaxy_tags:
     - bitcoin
     - btc

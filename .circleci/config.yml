@@ -5,7 +5,7 @@ jobs:
   build:
     machine:
       # https://circleci.com/docs/configuration-reference/#machine
-      image: ubuntu-2004:2024.08.1
+      image: ubuntu-2404:2024.11.1
     environment:
       ANSIBLE_PYTHON_INTERPRETER: /usr/bin/python3
 
@@ -27,6 +27,7 @@ jobs:
           command: ansible-playbook tests/test.yml -i tests/inventory --connection=local
           no_output_timeout: 20m
       - run: ansible-playbook tests/test.yml -i tests/inventory --connection=local
+
       - run: bitcoin-cli -version
       - run: sudo cat /etc/bitcoin/bitcoind.conf
       - run: sudo systemctl stop bitcoind
