@@ -3,7 +3,7 @@
 - name: Get current bitcoin version
   ansible.builtin.command: bitcoin-cli -version
   register: bitcoin_version_current
-  ignore_errors: true
+  failed_when: false
   changed_when: false
 
 - name: Import compile.yml
@@ -16,7 +16,7 @@
 - name: Check if munin-node is installed
   ansible.builtin.command: dpkg -L munin-node
   register: bitcoin_munin_node_check
-  ignore_errors: true
+  failed_when: false
   changed_when: false
 
 - name: Import munin-plugin.yml

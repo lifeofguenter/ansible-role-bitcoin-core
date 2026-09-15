@@ -1,18 +1,21 @@
 ---
 
-- name: Bitcoin_reload_systemd
-  ansible.builtin.systemd:
+- name: Reload systemd
+  listen: bitcoin_reload_systemd
+  ansible.builtin.systemd_service:
     daemon_reload: true
   become: true
 
-- name: Bitcoin_restart_munin_node
-  ansible.builtin.systemd:
+- name: Restart munin-node
+  listen: bitcoin_restart_munin_node
+  ansible.builtin.systemd_service:
     name: munin-node
     state: restarted
   become: true
 
-- name: Restart_bitcoind
-  ansible.builtin.systemd:
+- name: Restart bitcoind
+  listen: bitcoin_restart_bitcoind
+  ansible.builtin.systemd_service:
     name: bitcoind
     state: restarted
     enabled: true
