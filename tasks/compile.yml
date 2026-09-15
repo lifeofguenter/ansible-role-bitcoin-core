@@ -3,12 +3,14 @@
 - name: Install prerequisites
   ansible.builtin.apt:
     name:
-      - build-essential
       - ca-certificates
       - cmake
+      - g++
+      - gcc
       - libboost-dev
       - libevent-dev
       - libsqlite3-dev
+      - make
       - pkgconf
       - python3
     state: present
