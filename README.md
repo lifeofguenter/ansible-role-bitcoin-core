@@ -6,11 +6,11 @@ An Ansible role that compiles and installs bitcoind, bitcoin-cli and bitcoin-tx 
 
 ## Requirements
 
-none
+Debian 12+ or Ubuntu 24.04+ - Bitcoin Core 31.0 needs GCC 12.1+ and CMake 3.22+ to compile.
 
 ## Role Variables
 
-- `bitcoin_version: 28.0`
+- `bitcoin_version: 31.0`
 
 - `bitcoin_user: bitcoin`
 

@@ -12,8 +12,8 @@
   ansible.builtin.copy:
     src: munin-bitcoin/{{ item }}
     dest: /usr/share/munin/plugins/{{ item }}
-    mode: a+x
-  with_items:
+    mode: '0755'
+  loop:
     - bitcoind_blockchain_size
     - bitcoind_blockchain_verification
     - bitcoind_blocks
@@ -23,14 +23,14 @@
     - bitcoind_mempool_size
     - bitcoind_network_traffic
   become: true
-  notify: Bitcoin_restart_munin_node
+  notify: bitcoin_restart_munin_node
 
-- name: Enable unbound_munin_histogram
+- name: Enable plugins
   ansible.builtin.file:
     src: /usr/share/munin/plugins/{{ item }}
     dest: /etc/munin/plugins/{{ item }}
     state: link
-  with_items:
+  loop:
     - bitcoind_blockchain_size
     - bitcoind_blockchain_verification
     - bitcoind_blocks
@@ -40,7 +40,7 @@
     - bitcoind_mempool_size
     - bitcoind_network_traffic
   become: true
-  notify: Bitcoin_restart_munin_node
+  notify: bitcoin_restart_munin_node
 
 - name: Add munin plugin-conf
   ansible.builtin.template:
@@ -48,4 +48,4 @@
     dest: /etc/munin/plugin-conf.d/bitcoind
     mode: '0644'
   become: true
-  notify: Bitcoin_restart_munin_node
+  notify: bitcoin_restart_munin_node

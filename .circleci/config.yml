@@ -4,8 +4,8 @@ jobs:
 
   build:
     machine:
-      # https://circleci.com/docs/configuration-reference/#machine
-      image: ubuntu-2404:2024.11.1
+      # https://circleci.com/developer/machine/image/ubuntu-2404
+      image: ubuntu-2404:2026.05.1
     environment:
       ANSIBLE_PYTHON_INTERPRETER: /usr/bin/python3
 
@@ -13,8 +13,11 @@ jobs:
       - run: sudo rm -f /etc/apt/sources.list.d/google.list /etc/apt/sources.list.d/heroku.list
       - run: sudo apt remove --assume-yes --purge apparmor
       - run: sudo apt update
+      - run: sudo apt install --assume-yes python3-venv
 
-      - run: pip3 install ansible ansible-lint
+      - run: python3 -m venv ~/.venv
+      - run: echo 'export PATH=$HOME/.venv/bin:$PATH' >> "$BASH_ENV"
+      - run: pip install --upgrade pip ansible ansible-lint
       - run: ansible --version
       - run: ansible-lint --version
 
@@ -31,3 +34,8 @@ jobs:
       - run: bitcoin-cli -version
       - run: sudo cat /etc/bitcoin/bitcoind.conf
       - run: sudo systemctl stop bitcoind
+
+workflows:
+  test:
+    jobs:
+      - build
